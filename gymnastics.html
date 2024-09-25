@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymnastics Players</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        /* Add basic styling for the table and totals */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total-section {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .delete-button {
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background: #ce3737;
+        }
+        .bg-green {
+            background-color: lightgreen;
+        }
+        .bg-red {
+            background-color: lightcoral;
+        }
+        .search-input {
+            margin: 20px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!-- Start NavBar -->
+    <nav class="navbar">
+        <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
+    
+        <button type="button" id="button-navbar" class="navbar-burger" onclick="toggleMenuOpen()">
+            <span class="material-icons">menu</span>
+        </button>
+        <h1 class="navbar-title">Awards</h1>
+        <nav class="navbar-menu">
+            <button type="button"><a href="user.html">Home</a></button>
+            <button type="button"><a href="swimming.html"> swimming</a></button>
+            <button type="button"><a href="basketball.html">basketball</a></button>
+            <button type="button"><a href="Volleyball.html"> Volleyball</a></button>
+            <button type="button"><a href="football.html"> football</a></button>
+            <button type="button"><a href="update.html"> update</a></button>
+            <button type="button" class="custom-btn"><a class="button" href="auth.html">Login</a></button>
+        </nav>
+    </nav>
+    <!-- End NavBar -->
+
+    <div class="container">
+        <h1>Gymnastics Players</h1>
+        <div class="total-section">
+            <h2>Total Subscription Number: <span id="totalSubscriptionNumber">Loading...</span></h2>
+            <h2>Total Number of Subscriptions: <span id="totalNumberOfSubscriptions">Loading...</span></h2>
+        </div>
+        
+        <!-- Search input -->
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by Name...">
+
+        <table id="playersTable">
+            <thead>
+                <tr>
+                    <th>أسم اللاعب</th>
+                    <th>أسم اللعبه</th>
+                    <th>بدايه الأشتراك</th>
+                    <th>نهايه الأشتراك</th>
+                    <th>نوع الأشتراك</th>
+                    <th>أيام التمرين</th>
+                    <th>وقت التمرين</th>
+                    <th>حاله اللاعب</th>
+                    <th>الأشتراك</th>
+                    <th>رقم التلفون</th>
+                    <th>تاريخ الميلاد</th>
+                    <th>عدد الأشتراك</th>
+                    <th>الأيام المتبقيه ل الأشتراك</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+            <tbody id="playersContainer">
+                <!-- Football player data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function loadFootballData() {
+            fetch('http://localhost:3000/players', {
+                headers: {
+                    'Authorization': localStorage.getItem('token')
+                }
+            }).then(response => response.json())
+              .then(players => {
+                  const playersContainer = document.getElementById('playersContainer');
+                  const totalSubscriptionNumberElem = document.getElementById('totalSubscriptionNumber');
+                  const totalNumberOfSubscriptionsElem = document.getElementById('totalNumberOfSubscriptions');
+                  const searchInput = document.getElementById('searchInput');
+                  
+                  playersContainer.innerHTML = ''; // Clear previous content
+
+                  // Filter football players
+                  const footballPlayers = players.filter(player => player.playName === 'Gymnastics');
+                  
+                  let totalSubscriptionNumber = 0;
+                  let totalNumberOfSubscriptions = 0;
+
+                  footballPlayers.forEach(player => {
+                      const endSubscriptionDate = new Date(player.endSubscription);
+                      const startSubscriptionDate = new Date(player.startSubscription);
+                      const currentDate = new Date();
+
+                      // Calculate remaining days until subscription ends
+                      const remainingTimeDiff = endSubscriptionDate - currentDate;
+                      const remainingDaysDiff = Math.ceil(remainingTimeDiff / (1000 * 3600 * 24));
+
+                      // Calculate the total subscription period
+                      const totalTimeDiff = endSubscriptionDate - startSubscriptionDate;
+                      const totalDaysDiff = Math.ceil(totalTimeDiff / (1000 * 3600 * 24));
+
+                      let endSubscriptionClass = '';
+                    //   if (remainingDaysDiff <= 5 && remainingDaysDiff >= 0) {
+                    //       endSubscriptionClass = 'bg-red';
+                    //   }
+
+                      let totalDaysClass = '';
+                      if (totalDaysDiff < 5 && totalDaysDiff > 0) {
+                          totalDaysClass = 'bg-green';
+                      } else if (totalDaysDiff <= 0) {
+                          totalDaysClass = 'bg-red';
+                      }
+
+                      totalSubscriptionNumber += player.subscriptionNumber;
+                      totalNumberOfSubscriptions += player.numberOfSubscription;
+
+                      const row = document.createElement('tr');
+                      row.innerHTML = `
+                          <td>${player.playerName}</td>
+                          <td>${player.playName}</td>
+                          <td>${startSubscriptionDate.toLocaleDateString()}</td>
+                          <td class="${endSubscriptionClass}">${endSubscriptionDate.toLocaleDateString()}</td>
+                          <td>${player.typeSubscription}</td>
+                          <td>${player.daysTraining}</td>
+                          <td>${player.timeTraining}</td>
+                          <td>${player.statusPlayer}</td>
+                          <td>${player.subscriptionNumber}</td>
+                          <td>${player.phoneNumber}</td>
+                          <td>${new Date(player.dateOfBirth).toLocaleDateString()}</td>
+                          <td>${player.numberOfSubscription}</td>
+                          <td class="${totalDaysClass}">${remainingDaysDiff} days</td>
+                          <td><button class="delete-button" data-id="${player._id}">Delete</button></td>
+                      `;
+
+                      playersContainer.appendChild(row);
+                  });
+
+                  // Update totals
+                  totalSubscriptionNumberElem.textContent = totalSubscriptionNumber;
+                  totalNumberOfSubscriptionsElem.textContent = totalNumberOfSubscriptions;
+
+                  // Add event listeners for delete buttons
+                  document.querySelectorAll('.delete-button').forEach(button => {
+                      button.addEventListener('click', (e) => {
+                          const playerId = e.target.getAttribute('data-id');
+                          deletePlayer(playerId);
+                      });
+                  });
+
+                  // Filter players based on search input
+                  searchInput.addEventListener('input', () => {
+                      const searchTerm = searchInput.value.toLowerCase();
+                      document.querySelectorAll('#playersContainer tr').forEach(row => {
+                          const nameCell = row.querySelector('td:nth-child(1)');
+                          if (nameCell) {
+                              const playerName = nameCell.textContent.toLowerCase();
+                              row.style.display = playerName.includes(searchTerm) ? '' : 'none';
+                          }
+                      });
+                  });
+              });
+        }
+
+        function deletePlayer(playerId) {
+            fetch(`http://localhost:3000/players/${playerId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': localStorage.getItem('token')
+                }
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.message === 'Player deleted successfully') {
+                      alert('Player deleted successfully');
+                      loadFootballData(); // Reload football data
+                  } else {
+                      alert('Error deleting player');
+                  }
+              });
+        }
+
+        const toggleMenuOpen = () => document.body.classList.toggle("open");
+
+        window.onload = loadFootballData;
+    </script>
+</body>
+</html>

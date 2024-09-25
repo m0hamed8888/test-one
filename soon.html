@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Coming Soon</title>
+    <style>
+        /* Basic Reset*/
+
+       /* 
+body, h1, p, span, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f3f4f6, #dbe2e8);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+} */
+
+    </style>
+</head>
+<body>
+        <!-- Start NavBar -->
+        <nav class="navbar">
+            <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
+        
+            <button type="button" id="button-navbar" class="navbar-burger" onclick="toggleMenuOpen()">
+              <span class="material-icons">menu</span>
+            </button>
+            <h1 class="navbar-title">Awards</h1>
+            <nav class="navbar-menu">
+                <button type="button"><a href="user.html">Home</a></button>
+              <!-- <button type="button"><a href="contact.html">Contact</a></button> -->
+              <button type="button" class="active"><a href="soon.html">Our Service</a></button>
+              <button type="button" class="custom-btn"><a class="button" href="auth.html">login</a></button>
+            </nav>
+          </nav>
+          <!-- End NavBar -->
+    <div class="coming-soon-container">
+        <div class="coming-soon-content">
+            <h1>We're Launching Soon!</h1>
+            <p>Our website is under construction. We're working hard to bring you something amazing. Stay tuned!</p>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+            <form action="#" method="post" class="subscribe-form">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <script>
+                const toggleMenuOpen = () => document.body.classList.toggle("open");
+    </script>
+</body>
+</html>

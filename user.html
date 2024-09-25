@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<style>
+    /* General Body Style */
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f9;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: start;
+height: 100vh;
+}
+
+/* Container Style */
+.container {
+margin-top: 10%;
+background-color: #ffffff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+width: 80%;
+max-width: 700px;
+}
+
+/* Header Style */
+h1 {
+margin-bottom: 20px;
+font-size: 26px;
+color: #333;
+text-align: center;
+}
+
+/* Form Style */
+form {
+display: flex;
+flex-direction: column;
+}
+
+label {
+margin-top: 10px;
+font-weight: 600;
+color: #333;
+}
+
+input, select, button {
+padding: 10px;
+margin-top: 5px;
+margin-bottom: 20px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 16px;
+box-sizing: border-box;
+}
+
+input:focus, select:focus, button:focus {
+outline: none;
+border-color: #007bff;
+box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+padding: 12px;
+background-color: #007bff;
+color: #ffffff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 18px;
+}
+
+button:hover {
+background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.container {
+    width: 95%;
+    padding: 15px;
+    margin-top: 20%;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+input, select, button {
+    font-size: 14px;
+}
+
+button {
+    padding: 10px;
+}
+}
+
+
+h1 {
+margin-bottom: 20px;
+font-size: 24px;
+text-align: center;
+}
+
+h2 {
+margin-bottom: 10px;
+font-size: 20px;
+text-align: center;
+}
+
+#playersContainer {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+.player-card {
+background-color: #f9f9f9;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 15px;
+width: calc(100% / 1 - 30px); /* Adjust this for multiple columns */
+box-sizing: border-box;
+}
+
+.player-card h3 {
+margin-top: 0;
+}
+
+.player-card p {
+margin: 5px 0;
+}
+
+/* Responsive layout for smaller screens */
+@media (min-width: 600px) {
+#playersContainer {
+    flex-direction: row;
+}
+.player-card {
+    width: calc(50% - 30px);
+}
+}
+
+@media (min-width: 900px) {
+.player-card {
+    width: calc(33.333% - 30px);
+}
+}
+/**/
+
+.container {
+background-color: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+width: 90%;
+max-width: 900px;
+border: 2px solid #007bff; /* Border color */
+}
+
+h1 {
+margin-bottom: 20px;
+font-size: 24px;
+text-align: center;
+color: #007bff; /* Title color */
+}
+
+h2 {
+margin-bottom: 10px;
+font-size: 20px;
+text-align: center;
+color: #28a745; /* Subtitle color */
+}
+
+#playersContainer {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+.player-card {
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 15px;
+width: calc(100% / 1 - 30px); /* Adjust this for multiple columns */
+box-sizing: border-box;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.player-card h3 {
+margin-top: 0;
+color: #343a40; /* Heading color */
+}
+
+.player-card p {
+margin: 5px 0;
+color: #495057; /* Text color */
+}
+
+.player-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Colorful Card Backgrounds */
+.player-card:nth-child(odd) {
+background-color: #e9ecef; /* Light grey */
+}
+
+.player-card:nth-child(even) {
+background-color: #f8f9fa; /* Very light grey */
+}
+
+/* Responsive layout for smaller screens */
+@media (min-width: 600px) {
+#playersContainer {
+    flex-direction: row;
+}
+.player-card {
+    width: calc(50% - 30px);
+}
+}
+
+@media (min-width: 900px) {
+.player-card {
+    width: calc(33.333% - 30px);
+}
+}
+
+/**/
+/* Existing styles... */
+
+
+/*Start NavBar*/
+
+#button-navbar {
+border: 0;
+padding: 0;
+font-family: inherit;
+background: transparent;
+color: inherit;
+cursor: pointer;
+}
+
+.navbar {
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: 64px;
+background: #fff;
+color: blue;
+font-family: "Poppins";
+box-sizing: border-box;
+}
+
+@media only screen and (min-width: 600px) {
+.navbar {
+  justify-content: space-between;
+  padding: 0 0 0 16px;
+}
+}
+
+.navbar-overlay {
+position: fixed;
+z-index: 2;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+visibility: hidden;
+opacity: 0;
+transition: 0.3s;
+}
+
+body.open .navbar-overlay {
+visibility: visible;
+opacity: 1;
+}
+
+@media only screen and (min-width: 600px) {
+.navbar-overlay {
+  display: none;
+}
+}
+
+.navbar-burger {
+position: absolute;
+top: 0;
+left: 0;
+display: grid;
+place-items: center;
+width: 64px;
+height: 64px;
+padding: 0;
+}
+
+@media only screen and (min-width: 600px) {
+.navbar-burger {
+  display: none;
+}
+}
+
+.navbar-title {
+margin: 0;
+font-size: 16px;
+}
+
+.navbar-menu {
+position: fixed;
+z-index: 3;
+top: 0;
+left: 0;
+translate: -100% 0;
+width: 270px;
+height: 100%;
+padding: 20px;
+display: flex;
+gap: 8px;
+flex-direction: column;
+align-items: flex-start;
+visibility: hidden;
+transition: translate 0.3s;
+align-self: flex-start;
+}
+
+body.open .navbar-menu {
+translate: 0 0;
+visibility: visible;
+}
+
+@media only screen and (min-width: 600px) {
+.navbar-menu {
+  position: static;
+  translate: 0 0;
+  width: auto;
+  background: transparent;
+  flex-direction: row;
+  visibility: visible;
+}
+}
+
+.navbar-menu > button {
+color: #007bff;
+background: transparent;
+padding: 0 8px;
+}
+
+.navbar-menu > button.active {
+color: #007bff;
+}
+
+/*End NavBar*/
+
+/* Basic button styling */
+.custom-btn {
+display: inline-block;
+padding: 10px 20px;
+font-size: 16px;
+font-weight: 600;
+color: #007bff; /* Primary color */
+background-color: transparent; /* No background */
+border: 2px solid #007bff; /* Border color matching the text */
+border-radius: 4px; /* Rounded corners */
+cursor: pointer; /* Pointer cursor on hover */
+text-align: center;
+text-decoration: none;
+transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect */
+.custom-btn:hover {
+background-color: #007bff; /* Background color on hover */
+color: white; /* Text color on hover */
+}
+
+/* Focus effect */
+.custom-btn:focus {
+outline: none; /* Remove default focus outline */
+box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5); /* Custom focus ring */
+}  
+
+
+
+/*buttons style*/
+a {
+text-decoration: none; /* Remove underline */
+color: inherit;        /* Use inherited text color */
+background: none;      /* Remove background */
+border: none;          /* Remove border */
+padding: 0;            /* Remove padding */
+margin: 0;             /* Remove margin */
+font: inherit;         /* Inherit font properties */
+cursor: pointer;          /* Default cursor */
+}
+</style>
+<body>
+    <!-- Start NavBar -->
+    <nav class="navbar">
+        <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
+    
+        <button type="button" id="button-navbar" class="navbar-burger" onclick="toggleMenuOpen()">
+          <span class="material-icons">menu</span>
+        </button>
+        <h1 class="navbar-title">Awards</h1>
+        <nav class="navbar-menu">
+            <button type="button"><a href="user.html">Home</a></button>
+            <!-- <button type="button"><a href="contact.html">Contact</a></button> -->
+            <button type="button" class="active"><a href="soon.html">Our Service</a></button>
+            <button type="button" class="custom-btn"><a class="button" href="auth.html">Login</a></button>
+        </nav>
+    </nav>
+    <!-- End NavBar -->
+    <div class="container">
+        <h1>Player Registration</h1>
+        <form id="registrationForm">
+            <label for="playerName">Name Player:</label>
+            <input type="text" id="playerName" name="playerName" required>
+
+            <label for="playName">Name Play:</label>
+            <select id="playName" name="playName" required>
+                <option value="Football">Football</option>
+                <option value="Basketball">Basketball</option>
+                <option value="kickboxing ">kickboxing </option>
+                <option value="Swimming">Swimming</option>
+                <option value="Gymnastics">Gymnastics</option>
+                <option value="Volleyball">Volleyball</option>
+            </select>
+
+            <label for="startSubscription">Start Subscription:</label>
+            <input type="date" id="startSubscription" name="startSubscription" required>
+
+            <label for="endSubscription">End Subscription:</label>
+            <input type="date" id="endSubscription" name="endSubscription" required>
+
+            <label for="typeSubscription">Type Subscription:</label>
+            <select id="typeSubscription" name="typeSubscription" required>
+                <option value="Monthly">Monthly</option>
+                <option value="Quarterly">Quarterly</option>
+                <option value="Yearly">Yearly</option>
+            </select>
+
+            <label for="daysTraining">Days of Training:</label>
+            <select id="daysTraining" name="daysTraining" required>
+                <option value="Monday-Wednesday-Friday">Monday-Wednesday-Friday</option>
+                <option value="Tuesday-Thursday-Saturday">Tuesday-Thursday-Saturday</option>
+                <option value="Everyday">Everyday</option>
+            </select>
+
+            <label for="timeTraining">Time of Training:</label>
+            <input type="time" id="timeTraining" name="timeTraining" required>
+
+            <label for="statusPlayer">Status of Player:</label>
+            <select id="statusPlayer" name="statusPlayer" required>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+
+            <label for="subscriptionNumber">Subscription Number:</label>
+            <input type="number" id="subscriptionNumber" name="subscriptionNumber" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+
+            <label for="numberOfSubscription">Number of Subscription:</label>
+            <select id="numberOfSubscription" name="numberOfSubscription" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
+            <button type="button" onclick="registerPlayer()">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function registerPlayer() {
+            const form = document.getElementById('registrationForm');
+            const formData = new FormData(form);
+            const playerData = {};
+
+            formData.forEach((value, key) => {
+                playerData[key] = value;
+            });
+
+            fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                },
+                body: JSON.stringify(playerData)
+            }).then(response => {
+                if (response.ok) {
+                    alert('Player registered successfully!');
+                    form.reset();
+                } else {
+                    alert('Error registering player');
+                }
+            });
+        }
+
+        const toggleMenuOpen = () => document.body.classList.toggle("open");
+    </script>
+</body>
+</html>
